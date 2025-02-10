@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="ProductSuite">
+    <test name="ProductTests">
+        <classes>
+            <class name="org.example.GetProducTest"/>
+            <class name="org.example.CreateProductTest"/>
+            <class name="org.example.DeleteProductTest"/>
+        </classes>
+    </test>
+</suite>
