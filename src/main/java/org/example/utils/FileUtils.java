@@ -17,7 +17,7 @@ public class FileUtils {
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
       writer.write(content);
       writer.newLine(); // insert new line after writing to file
-      writer.flush(); // ensure the writer is flushed
+      writer.flush(); // if not added, sometimes newline is not added
     } catch (IOException e) {
       logger.error("exception encountered: ", e);
     }

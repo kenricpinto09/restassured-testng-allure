@@ -19,7 +19,12 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-// curl --location 'https://api.restful-api.dev/objects/ff808181932badb60194d35c633b4b2f'
+
+/*
+ *  example
+ *      curl --location 'https://api.restful-api.dev/objects/ff808181932badb60194d35c633b4b2f'
+ */
+
 
 public class GetProductTest {
 
