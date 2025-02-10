@@ -14,6 +14,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+/*
+ *  example
+ *      curl --location --request DELETE 'https://api.restful-api.dev/objects/ff808181932badb60194e963613773b1' 
+ */
+
 public class DeleteProductTest {
   private static final Logger logger = LogManager.getLogger(DeleteProductTest.class);
 

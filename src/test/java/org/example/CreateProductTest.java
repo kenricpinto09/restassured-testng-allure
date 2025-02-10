@@ -2,16 +2,10 @@ package org.example;
 
 import static org.testng.Assert.assertEquals;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.restassured.response.Response;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,9 +14,31 @@ import org.example.utils.FileUtils;
 import org.example.utils.JsonUtils;
 import org.example.utils.ProductUtils;
 import org.support.RetryAnalyzer;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.restassured.response.Response;
+
+
+/*
+ *  example
+ *      curl  --location 'https://api.restful-api.dev/objects' \
+ *            --header 'Content-Type: application/json' \
+ *            --data '{
+ *              "name": "Apple MacBook Pro 16",
+ *              "data": {
+ *                  "year": 2019,
+ *                  "price": 1849.99,
+ *                  "color": "black"
+ *              }
+ *            }' 
+ */
 
 public class CreateProductTest {
 
@@ -33,16 +49,11 @@ public class CreateProductTest {
 
   private static final String URL = Constants.URI + Constants.OBJECTS_ENDPOINT;
 
-  private SoftAssert softAssert;
-
-  @BeforeTest
-  public void beforeTest() throws IOException {
-    softAssert = new SoftAssert();
-  }
 
   @Test
   @Severity(SeverityLevel.CRITICAL)
   public void createProductTest() throws IOException {
+    SoftAssert softAssert = new SoftAssert();
     JsonNode jsonNode = JsonUtils.readJsonFile(CREATE_PRODUCT_JSON_FILE_PATH);
     // update json
     ObjectNode objectNode = (ObjectNode) jsonNode;
@@ -75,7 +86,7 @@ public class CreateProductTest {
   @Test(retryAnalyzer = RetryAnalyzer.class)
   @Severity(SeverityLevel.CRITICAL)
   public void createProductViaPojoTest() throws IOException {
-
+    SoftAssert softAssert = new SoftAssert();
     ObjectMapper objectMapper = new ObjectMapper();
     String productJson = Files.readString(Paths.get(CREATE_PRODUCT_JSON_FILE_PATH));
     Product product = objectMapper.readValue(productJson, Product.class);
@@ -111,6 +122,8 @@ public class CreateProductTest {
   @Test(retryAnalyzer = RetryAnalyzer.class)
   @Severity(SeverityLevel.MINOR)
   public void createProductFailure() {
+    SoftAssert softAssert = new SoftAssert();
+    
     // create product with no json reequest
     Response response = ProductUtils.createProduct(URL, "");
 
