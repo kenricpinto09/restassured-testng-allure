@@ -1,7 +1,5 @@
 plugins {
     id 'java'
-    // id 'io.qameta.allure' version '2.12.0'
-    // id 'io.qameta.allure' version '2.11.2'
     id 'io.qameta.allure' version '2.12.0'
 }
 
@@ -27,10 +25,6 @@ dependencies {
 
     implementation 'javax.ws.rs:javax.ws.rs-api:2.1.1'
 
-    // testImplementation 'io.qameta.allure:allure-testng:2.13.9'
-    // testImplementation 'org.aspectj:aspectjweaver:1.9.6'
-
-    // testImplementation 'io.qameta.allure:allure-testng:2.29.1'
     testImplementation 'io.qameta.allure:allure-testng:2.20.1'
 
 }
@@ -41,6 +35,7 @@ allure {
 }
 
 test {
-    useTestNG()
-    // jvmArgs += '-javaagent:${configurations.testCompileClasspath.find { it.name.contains("aspectjweaver") }}'
+    useTestNG {
+        suites 'src/test/resources/testng.xml'
+    }
 }
